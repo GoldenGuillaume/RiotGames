@@ -11,7 +11,7 @@ namespace RiotGames.Api.Http
     {
         private protected readonly HttpClient Client;
 
-        public ApiService(HttpClient client)
+        private protected ApiService(HttpClient client)
         {
             client.BaseAddress = new Uri("https://euw1.api.riotgames.com/");
             client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
