@@ -1,3 +1,4 @@
+using RiotGames.Api.Enums;
 using RiotGames.Api.Models;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -7,7 +8,7 @@ namespace RiotGames.Api.Http
 {
     public class SpectatorService : ApiService
     {
-        public SpectatorService(HttpClient client) : base(client) { }
+        public SpectatorService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<CurrentGameInfo> GetCurrentGameInfoBySummonerId(string encryptedSummonerId)
         {

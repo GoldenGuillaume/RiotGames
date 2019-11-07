@@ -9,7 +9,7 @@ namespace RiotGames.Api.Http
 {
     public class LeagueService : ApiService
     {
-        public LeagueService(HttpClient client) : base(client) { }
+        public LeagueService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<LeagueList> GetChallengerLeagueByQueue(QueueEnum queue)
         {

@@ -1,4 +1,5 @@
-﻿using RiotGames.Api.Models;
+﻿using RiotGames.Api.Enums;
+using RiotGames.Api.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -6,7 +7,7 @@ namespace RiotGames.Api.Http
 {
     public class ChampionService : ApiService
     {
-        public ChampionService(HttpClient client) : base(client) { }
+        public ChampionService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<ChampionInfo> GetChampionRotations()
         {

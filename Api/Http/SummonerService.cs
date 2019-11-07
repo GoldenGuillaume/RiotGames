@@ -1,4 +1,5 @@
-﻿using RiotGames.Api.Models;
+﻿using RiotGames.Api.Enums;
+using RiotGames.Api.Models;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace RiotGames.Api.Http
 {
     public class SummonerService : ApiService
     {
-        public SummonerService(HttpClient client) : base(client) { }
+        public SummonerService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<Summoner> GetSummonerByAccountId(string encryptedAccountId)
         {

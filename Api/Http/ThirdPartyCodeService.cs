@@ -1,3 +1,4 @@
+using RiotGames.Api.Enums;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ namespace RiotGames.Api.Http
 {
     public class ThirdPartyCodeService : ApiService
     {
-        public ThirdPartyCodeService(HttpClient client) : base(client) { }
+        public ThirdPartyCodeService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<string> GetThirdPartyCodeBySummonerId(string encryptedSummonerId)
         {

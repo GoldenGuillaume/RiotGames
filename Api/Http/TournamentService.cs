@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RiotGames.Api.Enums;
 using RiotGames.Api.Http.Query;
 using RiotGames.Api.Models;
 using System;
@@ -11,13 +12,13 @@ namespace RiotGames.Api.Http
 {
     public class TournamentService : ApiService
     {
-        public TournamentService(HttpClient client) : base(client) { }
+        public TournamentService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, Dictionary<string, string> body)
         {
             if (body == null) throw new Exception("The body must not be null");
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_POST_TOURNAMENT_CODE, queryParams))
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_POST_TOURNAMENT_CODE, queryParameters: queryParams))
             {
                 Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
             };

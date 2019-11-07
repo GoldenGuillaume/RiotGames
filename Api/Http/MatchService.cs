@@ -1,4 +1,5 @@
-﻿using RiotGames.Api.Http.Query;
+﻿using RiotGames.Api.Enums;
+using RiotGames.Api.Http.Query;
 using RiotGames.Api.Models;
 using RiotGamesRiotGames.Api.Models;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace RiotGames.Api.Http
 {
     public class MatchService : ApiService
     {
-        public MatchService(HttpClient client) : base(client) { }
+        public MatchService(HttpClient client, LocationEnum location) : base(client, location) { }
 
         public async Task<List<long>> GetMatchIdsByTournamentCode(string tournamentCode)
         {

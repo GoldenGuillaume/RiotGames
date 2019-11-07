@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
+using RiotGames.Api.Enums;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,9 +12,9 @@ namespace RiotGames.Api.Http
     {
         private protected readonly HttpClient Client;
 
-        private protected ApiService(HttpClient client)
+        private protected ApiService(HttpClient client, LocationEnum location)
         {
-            client.BaseAddress = new Uri("https://euw1.api.riotgames.com/");
+            client.BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()));
             client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
             client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("ASPNETCORE_API_TOKEN"));
             client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
@@ -22,39 +23,22 @@ namespace RiotGames.Api.Http
             Client = client;
         }
 
-        private protected static Uri BuildUri(string template, object queryParameters)
+        private protected static Uri BuildUri(string template, Dictionary<string, object> pathParameters = null, object queryParameters = null)
         {
             if (template == null)
                 throw new ArgumentNullException(nameof(template), "The parameter cannot be null");
-            if (queryParameters == null)
-                throw new ArgumentNullException(nameof(queryParameters), "The parameter cannot be null");
 
-            Uri uri = new Uri(template);
-            var builder = new UriBuilder(uri);
-            var query = QueryHelpers.ParseQuery(uri.Query);
-
-            foreach (FieldInfo field in queryParameters.GetType().GetFields())
+            Uri uri;
+            if (pathParameters != null)
             {
-                if (field.GetValue(queryParameters) != null)
-                {
-                    query[field.Name] = field.GetValue(queryParameters).ToString();
-                }
+                UriTemplate templateBuilder = new UriTemplate(template);
+                templateBuilder.AddParameters(pathParameters);
+                uri = new Uri(templateBuilder.Resolve());
             }
-            builder.Query = query.ToString();
-            return builder.Uri;
-        }
-
-        private protected static Uri BuildUri(string template, Dictionary<string, object> pathParameters, object queryParameters = null)
-        {
-            if (template == null)
-                throw new ArgumentNullException(nameof(template), "The parameter cannot be null");
-            if (pathParameters == null)
-                throw new ArgumentNullException(nameof(pathParameters), "The parameter cannot be null");
-
-
-            UriTemplate templateBuilder = new UriTemplate(template);
-            templateBuilder.AddParameters(pathParameters);   
-            Uri uri = new Uri(templateBuilder.Resolve());
+            else
+            {
+                uri = new Uri(template);
+            }
 
             if(queryParameters != null)
             {
