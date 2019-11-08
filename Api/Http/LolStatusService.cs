@@ -5,10 +5,23 @@ using System.Threading.Tasks;
 
 namespace RiotGames.Api.Http
 {
+    /// <summary>
+    /// Base class of the Riot Games API services providers
+    /// </summary>
     public class LolStatusService : ApiService
     {
+        /// <summary>
+        /// Construct the Http client and set it depending
+        /// on the League of legends server location
+        /// </summary>
+        /// <param name="client">Http client to provide</param>
+        /// <param name="location">League of legends server location</param>
         public LolStatusService(HttpClient client, LocationEnum location) : base(client, location) { }
 
+        /// <summary>
+        /// Retrieve current lol status
+        /// </summary>
+        /// <returns>Lol status details</returns>
         public async Task<ShardStatus> GetLolStatus()
         {
             var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.LOL_STATUS_SHARD));
@@ -19,7 +32,7 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
     }

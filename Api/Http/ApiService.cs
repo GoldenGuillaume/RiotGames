@@ -9,17 +9,18 @@ using Tavis.UriTemplates;
 namespace RiotGames.Api.Http
 {
     /// <summary>
-    /// 
+    /// Base class of the Riot Games API services providers
     /// </summary>
     public abstract class ApiService
     {
         private protected readonly HttpClient Client;
 
         /// <summary>
-        /// 
+        /// Construct the Http client and set it depending
+        /// on the League of legends server location
         /// </summary>
-        /// <param name="client"></param>
-        /// <param name="location"></param>
+        /// <param name="client">Http client to provide</param>
+        /// <param name="location">League of legends server location</param>
         private protected ApiService(HttpClient client, LocationEnum location)
         {
             client.BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()));
@@ -32,11 +33,11 @@ namespace RiotGames.Api.Http
         }
 
         /// <summary>
-        /// 
+        /// Utility method to build Uri by templating 
         /// </summary>
-        /// <param name="template"></param>
-        /// <param name="pathParameters"></param>
-        /// <param name="queryParameters"></param>
+        /// <param name="template">The uri string template</param>
+        /// <param name="pathParameters">A dictionary containing respectively as key the string value of the parameter and as value the value to insert in the uri</param>
+        /// <param name="queryParameters">An object containing the queries parameters to provide</param>
         /// <example>
         /// How to use it:
         /// <code>
@@ -67,7 +68,7 @@ namespace RiotGames.Api.Http
                 uri = new Uri(template);
             }
 
-            if(queryParameters != null)
+            if (queryParameters != null)
             {
                 var builder = new UriBuilder(uri);
                 var query = QueryHelpers.ParseQuery(uri.Query);

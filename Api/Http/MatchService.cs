@@ -8,10 +8,24 @@ using System.Threading.Tasks;
 
 namespace RiotGames.Api.Http
 {
+    /// <summary>
+    /// Base class of the Riot Games API services providers
+    /// </summary>
     public class MatchService : ApiService
     {
+        /// <summary>
+        /// Construct the Http client and set it depending
+        /// on the League of legends server location
+        /// </summary>
+        /// <param name="client">Http client to provide</param>
+        /// <param name="location">League of legends server location</param>
         public MatchService(HttpClient client, LocationEnum location) : base(client, location) { }
 
+        /// <summary>
+        /// Retrieve the match ids for specific tournament
+        /// </summary>
+        /// <param name="tournamentCode">Tournament code</param>
+        /// <returns>List of ids</returns>
         public async Task<List<long>> GetMatchIdsByTournamentCode(string tournamentCode)
         {
             var pathParams = new Dictionary<string, object>()
@@ -28,10 +42,15 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Retrieve a match by his id
+        /// </summary>
+        /// <param name="matchId">Match id</param>
+        /// <returns>Match value</returns>
         public async Task<Match> GetMatchById(long matchId)
         {
             var pathParams = new Dictionary<string, object>()
@@ -47,10 +66,16 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Retrieve a match by his id and his tournament code
+        /// </summary>
+        /// <param name="matchId">Match id</param>
+        /// <param name="tournamentCode">Tournament code</param>
+        /// <returns>Match value</returns>
         public async Task<Match> GetMatchByTournamentCodeAndId(long matchId, string tournamentCode)
         {
             var pathParams = new Dictionary<string, object>
@@ -68,10 +93,16 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Retrieve all matchs by an user account id
+        /// </summary>
+        /// <param name="encryptedAccountId">Encrypted account id</param>
+        /// <param name="queryParams">Match request parameters value</param>
+        /// <returns>Match list</returns>
         public async Task<MatchList> GetMatchListByEncryptedAccountId(string encryptedAccountId, MatchRequestParameters queryParams = null)
         {
             HttpRequestMessage requestMessage;
@@ -97,15 +128,20 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Retrieve match timeline by his id
+        /// </summary>
+        /// <param name="matchId">Match id</param>
+        /// <returns>Timeline of the specified match</returns>
         public async Task<MatchTimeline> GetMatchTimelineByMatchId(long matchId)
         {
             var pathParams = new Dictionary<string, object>()
             {
-                { nameof(matchId), matchId } 
+                { nameof(matchId), matchId }
             };
 
 
@@ -117,7 +153,7 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
     }

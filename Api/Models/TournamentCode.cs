@@ -8,7 +8,7 @@ namespace RiotGames.Api.Models
         public string Code { get; set; }
         public string Spectators { get; set; }
         public string Region { get; set; }
-        public int ProviderId { get; set; } 
+        public int ProviderId { get; set; }
         public int TeamSize { get; set; }
         public HashSet<string> Participants { get; set; }
         public string PickType { get; set; }

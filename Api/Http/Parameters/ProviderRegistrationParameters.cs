@@ -10,7 +10,7 @@ namespace RiotGames.Api.Http.Parameters
         public string Region { get; private set; }
 
         [JsonProperty("url")]
-        public string Url 
+        public string Url
         {
             get
             {

@@ -32,7 +32,7 @@ namespace RiotGames.Api.Http.Parameters
                 if (value >= 1 && value <= 5)
                     TeamSize = value;
             }
-        }      
+        }
 
         [JsonProperty("metadata")]
         public string Metadata { get; set; }

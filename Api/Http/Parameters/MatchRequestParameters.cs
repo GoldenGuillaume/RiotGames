@@ -7,14 +7,14 @@ namespace RiotGames.Api.Http.Parameters
         public HashSet<int> Champion { get; set; }
         public HashSet<int> Queue { get; set; }
         public HashSet<int> Season { get; set; }
-        public long? BeginTime 
+        public long? BeginTime
         {
             get
             {
                 return BeginTime;
             }
-            set 
-            { 
+            set
+            {
                 if (EndTime != null)
                 {
                     if (value < EndTime && EndTime - value < 604800000)
@@ -24,7 +24,7 @@ namespace RiotGames.Api.Http.Parameters
                 {
                     BeginTime = value;
                 }
-            } 
+            }
         }
         public long? EndTime
         {
@@ -45,14 +45,14 @@ namespace RiotGames.Api.Http.Parameters
                 }
             }
         }
-        public int? BeginIndex 
+        public int? BeginIndex
         {
-            get 
+            get
             {
                 return BeginIndex;
             }
-            set 
-            { 
+            set
+            {
                 if (EndIndex != null)
                 {
                     if (value < EndIndex && EndIndex - value < 100)
@@ -62,7 +62,7 @@ namespace RiotGames.Api.Http.Parameters
                 {
                     BeginIndex = value;
                 }
-            } 
+            }
         }
         public int? EndIndex
         {

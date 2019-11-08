@@ -10,10 +10,25 @@ using System.Threading.Tasks;
 
 namespace RiotGames.Api.Http
 {
+    /// <summary>
+    /// Base class of the Riot Games API services providers
+    /// </summary>
     public class TournamentStubService : ApiService
     {
+        /// <summary>
+        /// Construct the Http client and set it depending
+        /// on the League of legends server location
+        /// </summary>
+        /// <param name="client">Http client to provide</param>
+        /// <param name="location">League of legends server location</param>
         public TournamentStubService(HttpClient client, LocationEnum location) : base(client, location) { }
 
+        /// <summary>
+        /// Create a tournament code
+        /// </summary>
+        /// <param name="queryParams">Tournament request parameters</param>
+        /// <param name="body">Tournament code parameters</param>
+        /// <returns>List of tournament codes</returns>
         public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, TournamentCodeParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
@@ -31,10 +46,15 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Retrieve a lobby event based on tournament code
+        /// </summary>
+        /// <param name="tournamentCode">code of the tournament</param>
+        /// <returns>Lobby event object value</returns>
         public async Task<LobbyEventWrapper> GetLobbyEventWrapperByTournamentCode(string tournamentCode)
         {
             var pathParams = new Dictionary<string, object>()
@@ -50,10 +70,15 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Create a tournament provider
+        /// </summary>
+        /// <param name="body">Provider registration parameters</param>
+        /// <returns>id of the provider created</returns>
         public async Task<int> CreateTournamentProvider(ProviderRegistrationParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
@@ -71,10 +96,15 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
 
+        /// <summary>
+        /// Create a tournament
+        /// </summary>
+        /// <param name="body">Tournament registration parameters</param>
+        /// <returns>id of the tournament</returns>
         public async Task<int> CreateTournament(TournamentRegistrationParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
@@ -92,7 +122,7 @@ namespace RiotGames.Api.Http
             }
             else
             {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, this.GetType().FullName, response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
             }
         }
     }
