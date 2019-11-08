@@ -11,15 +11,20 @@ TODO: Describe the installation process
 ##### Standard usage
 
 ```CSharp
-IRiotGamesApiService service = new LeagueService();
+IRiotGamesApiService service = new LeagueService(new HttpClient(), LocationEnum.EUW1);
 service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
 ```
 
 ##### Dependency injection inside an ASP .Net Core project
 
 ```CSharp
-IRiotGamesApiService service = new LeagueService();
-service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
+public void ConfigureServices(IServiceCollection services)
+{
+    /* Add Api implementation services */
+    services.AddHttpClient<SummonerService>();
+    services.AddHttpClient<LeagueService>();
+    services.AddHttpClient<MatchService>();
+}
 ```
 
 ## Contributing
