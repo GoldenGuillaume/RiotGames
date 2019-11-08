@@ -8,10 +8,18 @@ using Tavis.UriTemplates;
 
 namespace RiotGames.Api.Http
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ApiService
     {
         private protected readonly HttpClient Client;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="location"></param>
         private protected ApiService(HttpClient client, LocationEnum location)
         {
             client.BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()));
@@ -23,6 +31,25 @@ namespace RiotGames.Api.Http
             Client = client;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="pathParameters"></param>
+        /// <param name="queryParameters"></param>
+        /// <example>
+        /// How to use it:
+        /// <code>
+        ///     BuildUri("/template/uri", new Dictionary<string, object>(), new object());
+        ///     // Use named arguments to reverse params order
+        ///     BuildUri("/template/uri", queryParameters: new object(), pathParameters: new Dictionary<string, object>());
+        ///     // with only one optionnal param 
+        ///     BuildUri("/template/uri"), new Dictionary<string, object>());
+        ///     // with only one optionnal param reversed order
+        ///     BuildUri("/template/uri"), queryParameters: new object());
+        /// </code>
+        /// </example>
+        /// <returns>Uri formatted</returns>
         private protected static Uri BuildUri(string template, Dictionary<string, object> pathParameters = null, object queryParameters = null)
         {
             if (template == null)

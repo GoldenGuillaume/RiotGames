@@ -1,5 +1,5 @@
 ﻿using RiotGames.Api.Enums;
-using RiotGames.Api.Http.Query;
+using RiotGames.Api.Http.Parameters;
 using RiotGames.Api.Models;
 using RiotGamesRiotGames.Api.Models;
 using System.Collections.Generic;

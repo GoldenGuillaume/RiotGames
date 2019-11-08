@@ -1,4 +1,4 @@
-﻿namespace RiotGames.Api.Http.Query
+﻿namespace RiotGames.Api.Http.Parameters
 {
     public class TournamentRequestParameters
     {

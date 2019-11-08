@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RiotGames.Api.Enums;
-using RiotGames.Api.Http.Query;
+using RiotGames.Api.Http.Parameters;
 using RiotGames.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace RiotGames.Api.Http
     {
         public TournamentService(HttpClient client, LocationEnum location) : base(client, location) { }
 
-        public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, Dictionary<string, string> body)
+        public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, TournamentCodeParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
 
@@ -54,7 +54,7 @@ namespace RiotGames.Api.Http
             }
         }
 
-        public async void UpdateTournamentCode(string tournamentCode, Dictionary<string, string> body)
+        public async void UpdateTournamentCode(string tournamentCode, TournamentCodeParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
 
@@ -95,7 +95,7 @@ namespace RiotGames.Api.Http
             }
         }
 
-        public async Task<int> CreateTournamentProvider(Dictionary<string, string> body)
+        public async Task<int> CreateTournamentProvider(ProviderRegistrationParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
 
@@ -116,7 +116,7 @@ namespace RiotGames.Api.Http
             }
         }
 
-        public async Task<int> CreateTournament(Dictionary<string, string> body)
+        public async Task<int> CreateTournament(TournamentRegistrationParameters body)
         {
             if (body == null) throw new Exception("The body must not be null");
 
