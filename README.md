@@ -1,8 +1,10 @@
-# Project Name
+<p align="center">
+  <img src="Resources/logo_library.png">
+</p>
 
-Interface library for the Riot Games Rest API
+<p align="center">Interface library for the Riot Games Rest API</p>
 
-## Installation
+## Installation-q
 
 TODO: Describe the installation process
 
