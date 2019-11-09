@@ -17,6 +17,22 @@ namespace RiotGames.Api.Http
 
         /// <summary>
         /// Construct the Http client and set it depending
+        /// on the League of legends server location        
+        /// </summary>
+        /// <param name="location">League of legends server location</param>
+        private protected ApiService(LocationEnum location)
+        {
+            Client = new HttpClient
+            {
+                BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()))
+            };
+            Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("ASPNETCORE_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
+            Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
+        }
+        /// <summary>
+        /// Construct the Http client and set it depending
         /// on the League of legends server location
         /// </summary>
         /// <param name="client">Http client to provide</param>

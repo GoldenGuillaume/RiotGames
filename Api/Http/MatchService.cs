@@ -14,6 +14,12 @@ namespace RiotGames.Api.Http
     public class MatchService : ApiService
     {
         /// <summary>
+        /// Setup service
+        /// </summary>
+        /// <param name="location">League of legends server location</param>
+        public MatchService(LocationEnum location) : base(location) { }
+
+        /// <summary>
         /// Construct the Http client and set it depending
         /// on the League of legends server location
         /// </summary>

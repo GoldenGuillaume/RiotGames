@@ -13,6 +13,12 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        /// <param name="location">League of legends server location</param>
+        public ChampionService(LocationEnum location) : base(location) { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="client">Http client to provide</param>
         /// <param name="location">League of legends server location</param>
         public ChampionService(HttpClient client, LocationEnum location) : base(client, location) { }
