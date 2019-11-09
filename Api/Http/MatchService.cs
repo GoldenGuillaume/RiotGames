@@ -11,7 +11,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Base class of the Riot Games API services providers
     /// </summary>
-    public class MatchService : ApiService
+    public sealed class MatchService : ApiService
     {
         /// <summary>
         /// Setup service

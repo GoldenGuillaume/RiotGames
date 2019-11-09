@@ -9,7 +9,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Champion mastery service provider
     /// </summary>
-    public class ChampionMasteryService : ApiService
+    public sealed class ChampionMasteryService : ApiService
     {
         /// <summary>
         /// Setup service

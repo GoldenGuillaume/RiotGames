@@ -9,7 +9,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Base class of the Riot Games API services providers
     /// </summary>
-    public class SpectatorService : ApiService
+    public sealed class SpectatorService : ApiService
     {
         /// <summary>
         /// Setup service

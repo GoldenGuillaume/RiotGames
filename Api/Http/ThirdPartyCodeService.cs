@@ -8,7 +8,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Base class of the Riot Games API services providers
     /// </summary>
-    public class ThirdPartyCodeService : ApiService
+    public sealed class ThirdPartyCodeService : ApiService
     {
         /// <summary>
         /// Setup service

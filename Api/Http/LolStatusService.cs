@@ -8,7 +8,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Base class of the Riot Games API services providers
     /// </summary>
-    public class LolStatusService : ApiService
+    public sealed class LolStatusService : ApiService
     {
         /// <summary>
         /// Setup service

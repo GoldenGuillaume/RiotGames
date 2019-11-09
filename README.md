@@ -27,7 +27,7 @@ to get version compatibilities.
 ###### 1. Standard usage:
 
 ```CSharp
-IRiotGamesApiService service = new LeagueService(LocationEnum.EUW1);
+RiotGames.Api.Http.LeagueService service = new LeagueService(LocationEnum.EUW1);
 service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
 ```
 

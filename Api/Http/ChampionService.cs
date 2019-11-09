@@ -8,7 +8,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Champion service provider
     /// </summary>
-    public class ChampionService : ApiService
+    public sealed class ChampionService : ApiService
     {
         /// <summary>
         /// Setup service

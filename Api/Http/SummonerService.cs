@@ -9,7 +9,7 @@ namespace RiotGames.Api.Http
     /// <summary>
     /// Base class of the Riot Games API services providers
     /// </summary>
-    public class SummonerService : ApiService
+    public sealed class SummonerService : ApiService
     {
         /// <summary>
         /// Setup service
