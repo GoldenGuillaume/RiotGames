@@ -6,7 +6,7 @@
 
 ##
 [![Generic badge](https://img.shields.io/badge/version-1.1-green.svg)](https://github.com/GoldenGuillaume/RiotGames)
-[![Generic badge](https://img.shields.io/badge/runtime-.NET_Standard_2.0.3-blue.svg)](https://docs.microsoft.com/fr-fr/dotnet/standard/net-standard)
+[![Generic badge](https://img.shields.io/badge/runtime-.NET_Standard_2.1-blue.svg)](https://docs.microsoft.com/fr-fr/dotnet/standard/net-standard)
 [![Generic badge](https://img.shields.io/badge/dependencies-up_to_date-green.svg)](https://github.com/GoldenGuillaume/RiotGames)
 [![GitHub license](https://img.shields.io/github/license/GoldenGuillaume/RiotGames)](https://github.com/GoldenGuillaume/RiotGames)
 
@@ -19,7 +19,7 @@ setted to the constructor which take an HttpClient as parameter.
 
 ## Compatibility
 
-The project is built with .NET Standard version 2.0.3, it support compatibility with .NET Framework, .Net Core, Mono and Xamarin refer to [this link](https://docs.microsoft.com/fr-fr/dotnet/standard/net-standard)
+The project is built with .NET Standard version 2.1, it support compatibility with .NET Core, Mono and Xamarin, refer to [this link](https://docs.microsoft.com/fr-fr/dotnet/standard/net-standard)
 to get version compatibilities.
 
 ## Usage
