@@ -2,6 +2,7 @@
 using RiotGames.Api.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -25,6 +26,7 @@ namespace RiotGames.Api.Http
             {
                 return IsConfiguredRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
                     Client.DefaultRequestHeaders.Contains("Origin") &&
+                    Client.DefaultRequestHeaders.GetValues("Origin").All(value => value.Contains("https://developer.riotgames.com")) &&
                     Client.DefaultRequestHeaders.Contains("X-Riot-Token");
             } 
         }
