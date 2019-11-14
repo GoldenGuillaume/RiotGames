@@ -14,7 +14,8 @@
 
 ## Install
 
-Currently not on Nuget, clone the repository and add reference. To make it work you need to set a new environment variable called `ASPNETCORE_API_TOKEN` with your API key to be able to launch Http requests.
+Currently not on Nuget, clone the repository and add reference. To make it work you need to set a new environment variable called `RIOTGAMES_API_TOKEN` with your API key to be able to launch Http requests or to provide an HttpClient already
+setted to the constructor which take an HttpClient as parameter.
 
 ## Compatibility
 
