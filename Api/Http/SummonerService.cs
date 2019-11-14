@@ -38,7 +38,7 @@ namespace RiotGames.Api.Http
         /// <returns>Summoner value</returns>
         public async Task<Summoner> GetSummonerByAccountId(string encryptedAccountId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -67,7 +67,7 @@ namespace RiotGames.Api.Http
         /// <returns>Summoner value</returns>
         public async Task<Summoner> GetSummonerBySummonerName(string summonerName)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -96,7 +96,7 @@ namespace RiotGames.Api.Http
         /// <returns>Summoner value</returns>
         public async Task<Summoner> GetSummonerByPuuid(string encryptedPUUID)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -124,7 +124,7 @@ namespace RiotGames.Api.Http
         /// <returns>Summoner value</returns>
         public async Task<Summoner> GetSummonerBySummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {

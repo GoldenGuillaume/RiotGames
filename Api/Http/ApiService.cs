@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
 using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,15 @@ namespace RiotGames.Api.Http
 
         private protected readonly HttpClient Client;
 
-        private protected bool LocationConfigured 
+        private protected bool ServiceConfigured 
         { 
             get 
             {
                 return IsConfiguredRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
                     Client.DefaultRequestHeaders.Contains("Origin") &&
-                    Client.DefaultRequestHeaders.GetValues("Origin").All(value => value.Contains("https://developer.riotgames.com")) &&
-                    Client.DefaultRequestHeaders.Contains("X-Riot-Token");
+                    Client.DefaultRequestHeaders.GetValues("Origin").SingleOrDefault().Contains("https://developer.riotgames.com") &&
+                    Client.DefaultRequestHeaders.Contains("X-Riot-Token") &&
+                    Client.DefaultRequestHeaders.GetValues("X-Riot-Token").Count() == 1;
             } 
         }
 
@@ -54,7 +56,7 @@ namespace RiotGames.Api.Http
         {
             Client = new HttpClient()
             {
-                BaseAddress = new Uri(String.Format(BaseAdressTemplate, location.ToString().ToLower()))
+                BaseAddress = new Uri(string.Format(BaseAdressTemplate, location.ToString().ToLower()))
             };
 
             Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
@@ -69,7 +71,18 @@ namespace RiotGames.Api.Http
         /// </summary>
         /// <param name="client">Http client to provide</param>
         private protected ApiService(HttpClient client)
-            => Client = client;
+        {
+            if (client.DefaultRequestHeaders.Contains("Origin"))
+                client.DefaultRequestHeaders.Remove("Origin");
+
+            if (!client.DefaultRequestHeaders.Contains("X-Riot-Token") ||
+                 client.DefaultRequestHeaders.Where(head => head.Key == "X-Riot-Token").FirstOrDefault().Value.FirstOrDefault() == null)
+                throw new InvalidHttpClientInstantiationException(client);
+
+            client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
+            Client = client;
+        }
+            
 
         /// <summary>
         /// Configure on each server the Api calls

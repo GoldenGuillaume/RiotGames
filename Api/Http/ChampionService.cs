@@ -34,7 +34,7 @@ namespace RiotGames.Api.Http
         /// <returns>Champion informations</returns>
         public async Task<ChampionInfo> GetChampionRotations()
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.CHAMPION_ROTATION));
 

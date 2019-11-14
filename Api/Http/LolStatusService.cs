@@ -36,7 +36,7 @@ namespace RiotGames.Api.Http
         /// <returns>Lol status details</returns>
         public async Task<ShardStatus> GetLolStatus()
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.LOL_STATUS_SHARD));
 

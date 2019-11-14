@@ -39,7 +39,7 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetChallengerLeagueByQueue(QueueEnum queue)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -67,7 +67,7 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetGrandMasterLeagueByQueue(QueueEnum queue)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -95,7 +95,7 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetMasterLeagueByQueue(QueueEnum queue)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -123,7 +123,7 @@ namespace RiotGames.Api.Http
         /// <returns>All the league entries</returns>
         public async Task<HashSet<LeagueEntry>> GetAllLeagueEntriesBySummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -154,7 +154,7 @@ namespace RiotGames.Api.Http
         /// <returns></returns>
         public async Task<HashSet<LeagueEntry>> GetAllLeagueEntries(QueueEnum queue, TierEnum tier, DivisionEnum division, LeagueRequestParameters queryParams = null)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 HttpRequestMessage requestMessage;
                 var pathParams = new Dictionary<string, object>
@@ -194,7 +194,7 @@ namespace RiotGames.Api.Http
         /// <returns>League content</returns>
         public async Task<LeagueList> GetLeagueById(string leagueId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {

@@ -40,7 +40,7 @@ namespace RiotGames.Api.Http
         /// <returns>List of ids</returns>
         public async Task<List<long>> GetMatchIdsByTournamentCode(string tournamentCode)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -69,7 +69,7 @@ namespace RiotGames.Api.Http
         /// <returns>Match value</returns>
         public async Task<Match> GetMatchById(long matchId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -98,7 +98,7 @@ namespace RiotGames.Api.Http
         /// <returns>Match value</returns>
         public async Task<Match> GetMatchByTournamentCodeAndId(long matchId, string tournamentCode)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -129,7 +129,7 @@ namespace RiotGames.Api.Http
         /// <returns>Match list</returns>
         public async Task<MatchList> GetMatchListByEncryptedAccountId(string encryptedAccountId, MatchRequestParameters queryParams = null)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 HttpRequestMessage requestMessage;
                 var pathParams = new Dictionary<string, object>()
@@ -167,7 +167,7 @@ namespace RiotGames.Api.Http
         /// <returns>Timeline of the specified match</returns>
         public async Task<MatchTimeline> GetMatchTimelineByMatchId(long matchId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {

@@ -38,7 +38,7 @@ namespace RiotGames.Api.Http
         /// <returns>Current game info values</returns>
         public async Task<CurrentGameInfo> GetCurrentGameInfoBySummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -64,7 +64,7 @@ namespace RiotGames.Api.Http
         /// <returns>Featured games value</returns>
 		public async Task<FeaturedGames> GetFeaturedGames()
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.SPECTATOR_ALL_GAMES));
 

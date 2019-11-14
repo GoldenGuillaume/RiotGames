@@ -43,7 +43,7 @@ namespace RiotGames.Api.Http
         /// <returns>List of tournament codes</returns>
         public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, TournamentCodeParameters body)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 if (body == null) throw new Exception("The body must not be null");
 
@@ -73,7 +73,7 @@ namespace RiotGames.Api.Http
         /// <returns>Lobby event object value</returns>
         public async Task<LobbyEventWrapper> GetLobbyEventWrapperByTournamentCode(string tournamentCode)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {
@@ -101,7 +101,7 @@ namespace RiotGames.Api.Http
         /// <returns>id of the provider created</returns>
         public async Task<int> CreateTournamentProvider(ProviderRegistrationParameters body)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 if (body == null) throw new Exception("The body must not be null");
 
@@ -131,7 +131,7 @@ namespace RiotGames.Api.Http
         /// <returns>id of the tournament</returns>
         public async Task<int> CreateTournament(TournamentRegistrationParameters body)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 if (body == null) throw new Exception("The body must not be null");
 

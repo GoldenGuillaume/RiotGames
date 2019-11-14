@@ -37,7 +37,7 @@ namespace RiotGames.Api.Http
         /// <returns>Third party code</returns>
         public async Task<string> GetThirdPartyCodeBySummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>()
                 {

@@ -36,7 +36,7 @@ namespace RiotGames.Api.Http
         /// <returns>All masteries on champions</returns>
         public async Task<List<ChampionMastery>> GetChampionMasteriesByEncryptedSummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured) 
+            if (base.ServiceConfigured) 
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -66,7 +66,7 @@ namespace RiotGames.Api.Http
         /// <returns>Mastery on champion</returns>
         public async Task<ChampionMastery> GetChampionMasteryByChampionIdAndEncryptedSummonerId(long championId, string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -95,7 +95,7 @@ namespace RiotGames.Api.Http
         /// <returns>Total number of masteries</returns>
         public async Task<int> GetTotalMasteriesScoreByEncryptedSummonerId(string encryptedSummonerId)
         {
-            if (base.LocationConfigured)
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
