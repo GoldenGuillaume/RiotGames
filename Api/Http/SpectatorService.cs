@@ -1,4 +1,5 @@
 using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using RiotGames.Api.Models;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,6 +15,11 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        public SpectatorService() : base() { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="location">League of legends server location</param>
         public SpectatorService(LocationEnum location) : base(location) { }
 
@@ -23,7 +29,7 @@ namespace RiotGames.Api.Http
         /// </summary>
         /// <param name="client">Http client to provide</param>
         /// <param name="location">League of legends server location</param>
-        public SpectatorService(HttpClient client, LocationEnum location) : base(client, location) { }
+        public SpectatorService(HttpClient client) : base(client) { }
 
         /// <summary>
         /// Retrieve current game info by the summoner id
@@ -32,21 +38,25 @@ namespace RiotGames.Api.Http
         /// <returns>Current game info values</returns>
         public async Task<CurrentGameInfo> GetCurrentGameInfoBySummonerId(string encryptedSummonerId)
         {
-            var pathParams = new Dictionary<string, object>()
+            if (base.LocationConfigured)
             {
-                { nameof(encryptedSummonerId), encryptedSummonerId }
-            };
+                var pathParams = new Dictionary<string, object>()
+                {
+                    { nameof(encryptedSummonerId), encryptedSummonerId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.SPECTATOR_CURRENT_GAME_SUMMONER_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.SPECTATOR_CURRENT_GAME_SUMMONER_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<CurrentGameInfo>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<CurrentGameInfo>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
         /// <summary>
         /// Retrieve the featured games
@@ -54,16 +64,20 @@ namespace RiotGames.Api.Http
         /// <returns>Featured games value</returns>
 		public async Task<FeaturedGames> GetFeaturedGames()
         {
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.SPECTATOR_ALL_GAMES));
+            if (base.LocationConfigured)
+            {
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.SPECTATOR_ALL_GAMES));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<FeaturedGames>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<FeaturedGames>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
     }
 }

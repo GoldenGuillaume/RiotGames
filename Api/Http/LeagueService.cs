@@ -1,4 +1,5 @@
 ﻿using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using RiotGames.Api.Http.Parameters;
 using RiotGames.Api.Models;
 using System.Collections.Generic;
@@ -15,6 +16,11 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        public LeagueService() : base() { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="location">League of legends server location</param>
         public LeagueService(LocationEnum location) : base(location) { }
 
@@ -24,7 +30,7 @@ namespace RiotGames.Api.Http
         /// </summary>
         /// <param name="client">Http client to provide</param>
         /// <param name="location">League of legends server location</param>
-        public LeagueService(HttpClient client, LocationEnum location) : base(client, location) { }
+        public LeagueService(HttpClient client) : base(client) { }
 
         /// <summary>
         /// Retrieve the challenger league based on the queue
@@ -33,21 +39,25 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetChallengerLeagueByQueue(QueueEnum queue)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(queue), queue.ToString() }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(queue), queue.ToString() }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_CHALLENGER_QUEUE, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_CHALLENGER_QUEUE, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<LeagueList>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LeagueList>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -57,21 +67,25 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetGrandMasterLeagueByQueue(QueueEnum queue)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(queue), queue.ToString() }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(queue), queue.ToString() }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_GRANDMASTER_QUEUE, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_GRANDMASTER_QUEUE, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<LeagueList>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LeagueList>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -81,21 +95,25 @@ namespace RiotGames.Api.Http
         /// <returns>Content of the league</returns>
         public async Task<LeagueList> GetMasterLeagueByQueue(QueueEnum queue)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(queue), queue.ToString() }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(queue), queue.ToString() }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_MASTER_QUEUE, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_MASTER_QUEUE, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<LeagueList>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LeagueList>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -105,21 +123,25 @@ namespace RiotGames.Api.Http
         /// <returns>All the league entries</returns>
         public async Task<HashSet<LeagueEntry>> GetAllLeagueEntriesBySummonerId(string encryptedSummonerId)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(encryptedSummonerId), encryptedSummonerId }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(encryptedSummonerId), encryptedSummonerId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_SUMMONER_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_SUMMONER_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<HashSet<LeagueEntry>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<HashSet<LeagueEntry>>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -132,33 +154,37 @@ namespace RiotGames.Api.Http
         /// <returns></returns>
         public async Task<HashSet<LeagueEntry>> GetAllLeagueEntries(QueueEnum queue, TierEnum tier, DivisionEnum division, LeagueRequestParameters queryParams = null)
         {
-            HttpRequestMessage requestMessage;
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(queue), queue.ToString() },
-                { nameof(tier), tier.ToString() },
-                { nameof(division), division.ToString() }
-            };
+                HttpRequestMessage requestMessage;
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(queue), queue.ToString() },
+                    { nameof(tier), tier.ToString() },
+                    { nameof(division), division.ToString() }
+                };
 
-            if (queryParams == null)
-            {
-                requestMessage = new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_QUEUE_TIER_DIVISION, pathParams));
-            }
-            else
-            {
-                requestMessage = new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_QUEUE_TIER_DIVISION, pathParams, queryParams));
-            }
+                if (queryParams == null)
+                {
+                    requestMessage = new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_QUEUE_TIER_DIVISION, pathParams));
+                }
+                else
+                {
+                    requestMessage = new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_QUEUE_TIER_DIVISION, pathParams, queryParams));
+                }
 
-            var response = await base.Client.SendAsync(requestMessage);
+                var response = await base.Client.SendAsync(requestMessage);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<HashSet<LeagueEntry>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<HashSet<LeagueEntry>>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -168,21 +194,25 @@ namespace RiotGames.Api.Http
         /// <returns>League content</returns>
         public async Task<LeagueList> GetLeagueById(string leagueId)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(leagueId), leagueId }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(leagueId), leagueId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.LEAGUE_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<LeagueList>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LeagueList>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
     }
 }

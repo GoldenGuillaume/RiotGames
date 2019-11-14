@@ -1,4 +1,5 @@
 using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using RiotGames.Api.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        public LolStatusService() : base() { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="location">League of legends server location</param>
         public LolStatusService(LocationEnum location) : base(location) { }
 
@@ -22,7 +28,7 @@ namespace RiotGames.Api.Http
         /// </summary>
         /// <param name="client">Http client to provide</param>
         /// <param name="location">League of legends server location</param>
-        public LolStatusService(HttpClient client, LocationEnum location) : base(client, location) { }
+        public LolStatusService(HttpClient client) : base(client) { }
 
         /// <summary>
         /// Retrieve current lol status
@@ -30,16 +36,20 @@ namespace RiotGames.Api.Http
         /// <returns>Lol status details</returns>
         public async Task<ShardStatus> GetLolStatus()
         {
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.LOL_STATUS_SHARD));
+            if (base.LocationConfigured)
+            {
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, RiotGames.Properties.Resources.LOL_STATUS_SHARD));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<ShardStatus>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<ShardStatus>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
     }
 }

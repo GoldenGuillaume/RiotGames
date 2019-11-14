@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Tavis.UriTemplates;
 
 namespace RiotGames.Api.Http
@@ -13,40 +14,68 @@ namespace RiotGames.Api.Http
     /// </summary>
     public abstract class ApiService
     {
+        private protected readonly static string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
+        private static readonly Regex IsConfiguredRegex = new Regex("^https://[euw1 | eun1 | na1].api.riotgames.com/$", RegexOptions.Compiled | RegexOptions.Singleline);
+
         private protected readonly HttpClient Client;
+
+        private protected bool LocationConfigured 
+        { 
+            get 
+            {
+                return IsConfiguredRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
+                    Client.DefaultRequestHeaders.Contains("Origin") &&
+                    Client.DefaultRequestHeaders.Contains("X-Riot-Token");
+            } 
+        }
 
         /// <summary>
         /// Construct the Http client and set it depending
         /// on the League of legends server location        
         /// </summary>
-        /// <param name="location">League of legends server location</param>
-        private protected ApiService(LocationEnum location)
+        private protected ApiService()
         {
-            Client = new HttpClient
-            {
-                BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()))
-            };
+            Client = new HttpClient();
+
             Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("ASPNETCORE_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
             Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
             Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         }
+
+        /// <summary>
+        /// Construct the Http client and set it depending
+        /// on the League of legends server location
+        /// </summary>
+        /// <param name="location">League of legends server location</param>
+        private protected ApiService(LocationEnum location)
+        {
+            Client = new HttpClient()
+            {
+                BaseAddress = new Uri(String.Format(BaseAdressTemplate, location.ToString().ToLower()))
+            };
+
+            Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
+            Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
+        }
+
         /// <summary>
         /// Construct the Http client and set it depending
         /// on the League of legends server location
         /// </summary>
         /// <param name="client">Http client to provide</param>
-        /// <param name="location">League of legends server location</param>
-        private protected ApiService(HttpClient client, LocationEnum location)
-        {
-            client.BaseAddress = new Uri(String.Format("https://{0}.api.riotgames.com/", location.ToString().ToLower()));
-            client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("ASPNETCORE_API_TOKEN"));
-            client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
+        private protected ApiService(HttpClient client)
+            => Client = client;
 
-            Client = client;
-        }
+        /// <summary>
+        /// Configure on each server the Api calls
+        /// will be made
+        /// </summary>
+        /// <param name="location">Server location to set</param>
+        public void ConfigureLocation(LocationEnum location)
+            => Client.BaseAddress = new Uri(String.Format(BaseAdressTemplate, location.ToString().ToLower()));
 
         /// <summary>
         /// Utility method to build Uri by templating 

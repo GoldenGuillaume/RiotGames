@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using RiotGames.Api.Http.Parameters;
 using RiotGames.Api.Models;
 using System;
@@ -18,6 +19,11 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        public TournamentStubService() : base() { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="location">League of legends server location</param>
         public TournamentStubService(LocationEnum location) : base(location) { }
 
@@ -27,7 +33,7 @@ namespace RiotGames.Api.Http
         /// </summary>
         /// <param name="client">Http client to provide</param>
         /// <param name="location">League of legends server location</param>
-        public TournamentStubService(HttpClient client, LocationEnum location) : base(client, location) { }
+        public TournamentStubService(HttpClient client) : base(client) { }
 
         /// <summary>
         /// Create a tournament code
@@ -37,23 +43,27 @@ namespace RiotGames.Api.Http
         /// <returns>List of tournament codes</returns>
         public async Task<List<string>> CreateTournamentCode(TournamentRequestParameters queryParams, TournamentCodeParameters body)
         {
-            if (body == null) throw new Exception("The body must not be null");
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_STUB_CODE, queryParameters: queryParams))
+            if (base.LocationConfigured)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
-            };
+                if (body == null) throw new Exception("The body must not be null");
 
-            var response = await base.Client.SendAsync(request);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_STUB_CODE, queryParameters: queryParams))
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                };
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<List<string>>();
+                var response = await base.Client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<string>>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -63,21 +73,25 @@ namespace RiotGames.Api.Http
         /// <returns>Lobby event object value</returns>
         public async Task<LobbyEventWrapper> GetLobbyEventWrapperByTournamentCode(string tournamentCode)
         {
-            var pathParams = new Dictionary<string, object>()
+            if (base.LocationConfigured)
             {
-                { nameof(tournamentCode), tournamentCode }
-            };
+                var pathParams = new Dictionary<string, object>()
+                {
+                    { nameof(tournamentCode), tournamentCode }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_STUB_TOURNAMENT_CODE, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.TOURNAMENT_STUB_TOURNAMENT_CODE, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<LobbyEventWrapper>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LobbyEventWrapper>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -87,23 +101,27 @@ namespace RiotGames.Api.Http
         /// <returns>id of the provider created</returns>
         public async Task<int> CreateTournamentProvider(ProviderRegistrationParameters body)
         {
-            if (body == null) throw new Exception("The body must not be null");
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, RiotGames.Properties.Resources.TOURNAMENT_STUB_PROVIDER)
+            if (base.LocationConfigured)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
-            };
+                if (body == null) throw new Exception("The body must not be null");
 
-            var response = await base.Client.SendAsync(request);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, RiotGames.Properties.Resources.TOURNAMENT_STUB_PROVIDER)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                };
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<int>();
+                var response = await base.Client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<int>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -113,23 +131,27 @@ namespace RiotGames.Api.Http
         /// <returns>id of the tournament</returns>
         public async Task<int> CreateTournament(TournamentRegistrationParameters body)
         {
-            if (body == null) throw new Exception("The body must not be null");
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, RiotGames.Properties.Resources.TOURNAMENT_STUB_TOURNAMENT)
+            if (base.LocationConfigured)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
-            };
+                if (body == null) throw new Exception("The body must not be null");
 
-            var response = await base.Client.SendAsync(request);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, RiotGames.Properties.Resources.TOURNAMENT_STUB_TOURNAMENT)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                };
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<int>();
+                var response = await base.Client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<int>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
     }
 }

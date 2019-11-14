@@ -1,4 +1,5 @@
 ﻿using RiotGames.Api.Enums;
+using RiotGames.Api.Exceptions;
 using RiotGames.Api.Models;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,6 +15,11 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Setup service
         /// </summary>
+        public ChampionMasteryService() : base() { }
+
+        /// <summary>
+        /// Setup service
+        /// </summary>
         /// <param name="location">League of legends server location</param>
         public ChampionMasteryService(LocationEnum location) : base(location) { }
 
@@ -21,8 +27,7 @@ namespace RiotGames.Api.Http
         /// Setup service
         /// </summary>
         /// <param name="client">Http client to provide</param>
-        /// <param name="location">League of legends server location</param>
-        public ChampionMasteryService(HttpClient client, LocationEnum location) : base(client, location) { }
+        public ChampionMasteryService(HttpClient client) : base(client) { }
 
         /// <summary>
         /// Retrieve the masteries related to a specific summoner
@@ -31,21 +36,25 @@ namespace RiotGames.Api.Http
         /// <returns>All masteries on champions</returns>
         public async Task<List<ChampionMastery>> GetChampionMasteriesByEncryptedSummonerId(string encryptedSummonerId)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured) 
             {
-                { nameof(encryptedSummonerId), encryptedSummonerId }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(encryptedSummonerId), encryptedSummonerId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_ALL_SUMMONER_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_ALL_SUMMONER_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<List<ChampionMastery>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<ChampionMastery>>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client); 
         }
 
         /// <summary>
@@ -57,22 +66,26 @@ namespace RiotGames.Api.Http
         /// <returns>Mastery on champion</returns>
         public async Task<ChampionMastery> GetChampionMasteryByChampionIdAndEncryptedSummonerId(long championId, string encryptedSummonerId)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(encryptedSummonerId), encryptedSummonerId },
-                { nameof(championId), championId }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(encryptedSummonerId), encryptedSummonerId },
+                    { nameof(championId), championId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_SUMMONER_CHAMPION_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_SUMMONER_CHAMPION_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<ChampionMastery>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<ChampionMastery>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -82,21 +95,25 @@ namespace RiotGames.Api.Http
         /// <returns>Total number of masteries</returns>
         public async Task<int> GetTotalMasteriesScoreByEncryptedSummonerId(string encryptedSummonerId)
         {
-            var pathParams = new Dictionary<string, object>
+            if (base.LocationConfigured)
             {
-                { nameof(encryptedSummonerId), encryptedSummonerId }
-            };
+                var pathParams = new Dictionary<string, object>
+                {
+                    { nameof(encryptedSummonerId), encryptedSummonerId }
+                };
 
-            var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_SCORE_SUMMONER_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.CHAMPION_MASTERY_SCORE_SUMMONER_ID, pathParams)));
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<int>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<int>();
+                }
+                else
+                {
+                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                }
             }
-            else
-            {
-                throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-            }
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
     }
 }
