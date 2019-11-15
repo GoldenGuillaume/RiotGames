@@ -25,7 +25,7 @@ namespace RiotGames.Api.Http
         { 
             get 
             {
-                return ValidBaseAdressRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
+                return Client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
                     Client.DefaultRequestHeaders.Contains("Origin") &&
                     Client.DefaultRequestHeaders.GetValues("Origin").SingleOrDefault().Contains("https://developer.riotgames.com") &&
                     Client.DefaultRequestHeaders.Contains("X-Riot-Token") &&
