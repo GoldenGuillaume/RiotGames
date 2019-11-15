@@ -42,7 +42,7 @@ namespace RiotGames.Api.Http
             Client = new HttpClient();
 
             Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly in the environment variable", innerException: null));
             Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
             Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         }
@@ -60,7 +60,7 @@ namespace RiotGames.Api.Http
             };
 
             Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly in the environment variable", innerException: null));
             Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
             Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         }
