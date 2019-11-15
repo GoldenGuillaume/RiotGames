@@ -17,7 +17,7 @@ namespace RiotGames.Api.Http
     public abstract class ApiService
     {
         private protected readonly static string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
-        private static readonly Regex IsConfiguredRegex = new Regex("^https://[euw1 | eun1 | na1].api.riotgames.com/$", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex ValidBaseAdressRegex = new Regex("^https://[euw1 | eun1 | na1].api.riotgames.com/$", RegexOptions.Compiled | RegexOptions.Singleline);
 
         private protected readonly HttpClient Client;
 
@@ -25,7 +25,7 @@ namespace RiotGames.Api.Http
         { 
             get 
             {
-                return IsConfiguredRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
+                return ValidBaseAdressRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
                     Client.DefaultRequestHeaders.Contains("Origin") &&
                     Client.DefaultRequestHeaders.GetValues("Origin").SingleOrDefault().Contains("https://developer.riotgames.com") &&
                     Client.DefaultRequestHeaders.Contains("X-Riot-Token") &&
@@ -78,7 +78,7 @@ namespace RiotGames.Api.Http
                 apiKey = value.First();
             }
             client.DefaultRequestHeaders.Clear();
-            client.BaseAddress = (client.BaseAddress != null && IsConfiguredRegex.IsMatch(client.BaseAddress.AbsoluteUri)) ? client.BaseAddress : null;
+            client.BaseAddress = (client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(client.BaseAddress.AbsoluteUri)) ? client.BaseAddress : null;
 
             client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
             client.DefaultRequestHeaders.Add("X-Riot-Token", apiKey ?? Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly neither in HttpClient parameter or in the environment variable", innerException: null));
