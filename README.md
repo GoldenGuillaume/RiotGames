@@ -53,7 +53,8 @@ RiotGames.Api.Http.LeagueService service = new LeagueService(client);
 service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
 ```
 
-Pass an unseted HttpClient instance and let the constructor configure it:
+Pass an unseted HttpClient instance and let the constructor configure it (notice that in that case the base address with location is not setted 
+you will have to call ConfigureLocation):
 ```CSharp
 HttpClient client = new HttpClient();
 RiotGames.Api.Http.LeagueService service = new LeagueService(client);
