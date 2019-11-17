@@ -27,13 +27,43 @@ to get version compatibilities.
 
 ###### 1. Standard usage:
 
+To Set the location building the service the api key is provided by the environment variable:
 ```CSharp
 RiotGames.Api.Http.LeagueService service = new LeagueService(LocationEnum.EUW1);
 service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
 ```
 
+The service is built with api key provided either the location need to be configurer
+here by the ConfigureLocation function who take LocationEnum as parameter:
+```CSharp
+RiotGames.Api.Http.LeagueService service = new LeagueService();
+service.ConfigureLocation(LocationEnum.EUW1);
+service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
+```
+
+The service is built with an HttpClient configured before, if the Environment variable
+isn't passed in the client sent as parameter then the environment variable is taken, if the
+baseAdress isn't correct either it is set to null and a call to ConfigureLocation is needed:
+```CSharp
+HttpClient client = new HttpClient();
+client.BaseAdress = "https://euw1.api.riotgames.com/"
+client.DefaultRequestHeaders.Add("X-Riot-Token", "YourApiKey");
+
+RiotGames.Api.Http.LeagueService service = new LeagueService(client);
+service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
+```
+
+Pass an unseted HttpClient instance and let the constructor configure it:
+```CSharp
+HttpClient client = new HttpClient();
+RiotGames.Api.Http.LeagueService service = new LeagueService(client);
+service.ConfigureLocation(LocationEnum.EUW1);
+service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
+```
+
 ###### 2. Dependency injection inside an ASP .Net Core project:
 
+Inject the service in the ConfigureService method of the startup.cs class:
 ```CSharp
 public void ConfigureServices(IServiceCollection services)
 {
@@ -42,6 +72,12 @@ public void ConfigureServices(IServiceCollection services)
     services.AddHttpClient<LeagueService>();
     services.AddHttpClient<MatchService>();
 }
+```
+
+Call ConfigureLocation before calling service method:
+```CSharp
+service.ConfigureLocation(LocationEnum.EUW1);
+service.GetChallengerLeagueByQueue(QueueEnum.RANKED_SOLO_5X5);
 ```
 
 ## License
