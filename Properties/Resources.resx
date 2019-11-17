@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CHAMPION_MASTERY_ALL_SUMMONER_ID" xml:space="preserve">
+    <value>/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}</value>
+    <comment>Get all champion mastery entries sorted by number of champion points descending.</comment>
+  </data>
+  <data name="CHAMPION_MASTERY_SCORE_SUMMONER_ID" xml:space="preserve">
+    <value>/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}</value>
+    <comment>Get a player's total champion mastery score, which is the sum of individual champion mastery levels.</comment>
+  </data>
+  <data name="CHAMPION_MASTERY_SUMMONER_CHAMPION_ID" xml:space="preserve">
+    <value>/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}</value>
+    <comment>Get a champion mastery by player ID and champion ID.</comment>
+  </data>
+  <data name="CHAMPION_ROTATION" xml:space="preserve">
+    <value>/lol/platform/v3/champion-rotations</value>
+    <comment>Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)</comment>
+  </data>
+  <data name="LEAGUE_CHALLENGER_QUEUE" xml:space="preserve">
+    <value>/lol/league/v4/challengerleagues/by-queue/{queue}</value>
+    <comment>Get the challenger league for given queue.</comment>
+  </data>
+  <data name="LEAGUE_GRANDMASTER_QUEUE" xml:space="preserve">
+    <value>/lol/league/v4/grandmasterleagues/by-queue/{queue}</value>
+    <comment>Get the grandmaster league of a specific queue.</comment>
+  </data>
+  <data name="LEAGUE_ID" xml:space="preserve">
+    <value>/lol/league/v4/leagues/{leagueId}</value>
+    <comment>Get league with given ID, including inactive entries.</comment>
+  </data>
+  <data name="LEAGUE_MASTER_QUEUE" xml:space="preserve">
+    <value>/lol/league/v4/masterleagues/by-queue/{queue}</value>
+    <comment>Get the master league for given queue.</comment>
+  </data>
+  <data name="LEAGUE_QUEUE_TIER_DIVISION" xml:space="preserve">
+    <value>/lol/league/v4/entries/{queue}/{tier}/{division}</value>
+    <comment>Get all the league entries.</comment>
+  </data>
+  <data name="LEAGUE_SUMMONER_ID" xml:space="preserve">
+    <value>/lol/league/v4/entries/by-summoner/{encryptedSummonerId}</value>
+    <comment>Get league entries in all queues for a given summoner ID.</comment>
+  </data>
+  <data name="LOL_STATUS_SHARD" xml:space="preserve">
+    <value>/lol/status/v3/shard-data</value>
+    <comment>Get League of Legends status for the given shard.</comment>
+  </data>
+  <data name="MATCH_ALL_ACCOUNT_ID" xml:space="preserve">
+    <value>/lol/match/v4/matchlists/by-account/{encryptedAccountId}</value>
+    <comment>Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.</comment>
+  </data>
+  <data name="MATCH_ID_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids</value>
+    <comment>Get match IDs by tournament code.</comment>
+  </data>
+  <data name="MATCH_MATCH_ID" xml:space="preserve">
+    <value>/lol/match/v4/matches/{matchId}</value>
+    <comment>Get match by match ID.</comment>
+  </data>
+  <data name="MATCH_MATCH_ID_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}</value>
+    <comment>Get match by match ID and tournament code.</comment>
+  </data>
+  <data name="MATCH_TIMELINE_MATCH_ID" xml:space="preserve">
+    <value>/lol/match/v4/timelines/by-match/{matchId}</value>
+    <comment>Get match timeline by match ID.</comment>
+  </data>
+  <data name="SPECTATOR_ALL_GAMES" xml:space="preserve">
+    <value>/lol/spectator/v4/featured-games</value>
+    <comment>Get list of featured games.</comment>
+  </data>
+  <data name="SPECTATOR_CURRENT_GAME_SUMMONER_ID" xml:space="preserve">
+    <value>/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}</value>
+    <comment>Get current game information for the given summoner ID.</comment>
+  </data>
+  <data name="SUMMONER_ACCOUNT_ID" xml:space="preserve">
+    <value>/lol/summoner/v4/summoners/by-account/{encryptedAccountId}</value>
+    <comment>Get a summoner by account ID.</comment>
+  </data>
+  <data name="SUMMONER_ID" xml:space="preserve">
+    <value>/lol/summoner/v4/summoners/{encryptedSummonerId}</value>
+    <comment>Get a summoner by summoner ID.</comment>
+  </data>
+  <data name="SUMMONER_NAME" xml:space="preserve">
+    <value>/lol/summoner/v4/summoners/by-name/{summonerName}</value>
+    <comment>Get a summoner by summoner name.</comment>
+  </data>
+  <data name="SUMMONER_PUUID" xml:space="preserve">
+    <value>/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}</value>
+    <comment>Get a summoner by PUUID.</comment>
+  </data>
+  <data name="THIRD_PARTY_CODE_SUMMONER_ID" xml:space="preserve">
+    <value>/lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}</value>
+    <comment>Get third party code for a given summoner ID.</comment>
+  </data>
+  <data name="TOURNAMENT_GET_LOBBY_EVENTS_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/tournament/v4/lobby-events/by-code/{tournamentCode}</value>
+    <comment>Gets a list of lobby events by tournament code.</comment>
+  </data>
+  <data name="TOURNAMENT_GET_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/tournament/v4/codes/{tournamentCode}</value>
+    <comment>Returns the tournament code DTO associated with a tournament code string.</comment>
+  </data>
+  <data name="TOURNAMENT_POST_PROVIDER" xml:space="preserve">
+    <value>/lol/tournament/v4/providers</value>
+    <comment>Creates a tournament provider and returns its ID.</comment>
+  </data>
+  <data name="TOURNAMENT_POST_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/tournament/v4/codes</value>
+    <comment>Creates a tournament and returns its ID.</comment>
+  </data>
+  <data name="TOURNAMENT_PUT_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/tournament/v4/codes/{tournamentCode}</value>
+    <comment>Update the pick type, map, spectator type, or allowed summoners for a code.</comment>
+  </data>
+  <data name="TOURNAMENT_STUB_CODE" xml:space="preserve">
+    <value>/lol/tournament-stub/v4/codes</value>
+    <comment>Create a mock tournament code for the given tournament.</comment>
+  </data>
+  <data name="TOURNAMENT_STUB_PROVIDER" xml:space="preserve">
+    <value>/lol/tournament-stub/v4/providers</value>
+    <comment>Creates a mock tournament provider and returns its ID.</comment>
+  </data>
+  <data name="TOURNAMENT_STUB_TOURNAMENT" xml:space="preserve">
+    <value>/lol/tournament-stub/v4/tournaments</value>
+    <comment>Creates a mock tournament and returns its ID.</comment>
+  </data>
+  <data name="TOURNAMENT_STUB_TOURNAMENT_CODE" xml:space="preserve">
+    <value>/lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}</value>
+    <comment>Gets a mock list of lobby events by tournament code.</comment>
+  </data>
+</root>
