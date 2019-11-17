@@ -132,7 +132,7 @@ namespace RiotGames.Api.Http
                 };
 
 
-                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.SUMMONER_SUMMONER_ID, pathParams)));
+                var response = await base.Client.SendAsync(new HttpRequestMessage(HttpMethod.Get, ApiService.BuildUri(RiotGames.Properties.Resources.SUMMONER_ID, pathParams)));
 
                 if (response.IsSuccessStatusCode)
                 {

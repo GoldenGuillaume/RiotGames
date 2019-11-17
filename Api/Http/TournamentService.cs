@@ -182,35 +182,5 @@ namespace RiotGames.Api.Http
             }
             throw new HttpServiceNotConfiguredException(base.Client);
         }
-
-        /// <summary>
-        /// Create a tournament
-        /// </summary>
-        /// <param name="body">Tournament registration parameters</param>
-        /// <returns>id of the tournament</returns>
-        public async Task<int> CreateTournament(TournamentRegistrationParameters body)
-        {
-            if (base.ServiceConfigured)
-            {
-                if (body == null) throw new Exception("The body must not be null");
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, RiotGames.Properties.Resources.TOURNAMENT_PUT_TOURNAMENT)
-                {
-                    Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
-                };
-
-                var response = await base.Client.SendAsync(request);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadAsAsync<int>();
-                }
-                else
-                {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
-                }
-            }
-            throw new HttpServiceNotConfiguredException(base.Client);
-        }
     }
 }

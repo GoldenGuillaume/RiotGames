@@ -119,138 +119,130 @@
   </resheader>
   <data name="CHAMPION_MASTERY_ALL_SUMMONER_ID" xml:space="preserve">
     <value>/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}</value>
-    <comment>Request uri to get all of the champion masteries by summoner </comment>
+    <comment>Get all champion mastery entries sorted by number of champion points descending.</comment>
   </data>
   <data name="CHAMPION_MASTERY_SCORE_SUMMONER_ID" xml:space="preserve">
     <value>/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}</value>
-    <comment>Request uri to get all of the champion masteries score by summoner</comment>
+    <comment>Get a player's total champion mastery score, which is the sum of individual champion mastery levels.</comment>
   </data>
   <data name="CHAMPION_MASTERY_SUMMONER_CHAMPION_ID" xml:space="preserve">
     <value>/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}</value>
-    <comment>Request uri to get champion mastery by champion and summoner</comment>
+    <comment>Get a champion mastery by player ID and champion ID.</comment>
   </data>
   <data name="CHAMPION_ROTATION" xml:space="preserve">
     <value>/lol/platform/v3/champion-rotations</value>
-    <comment>Request uri to get the champion rotation</comment>
+    <comment>Returns champion rotations, including free-to-play and low-level free-to-play rotations (REST)</comment>
   </data>
   <data name="LEAGUE_CHALLENGER_QUEUE" xml:space="preserve">
     <value>/lol/league/v4/challengerleagues/by-queue/{queue}</value>
-    <comment>Request uri to get the challenger league queue</comment>
+    <comment>Get the challenger league for given queue.</comment>
   </data>
   <data name="LEAGUE_GRANDMASTER_QUEUE" xml:space="preserve">
     <value>/lol/league/v4/grandmasterleagues/by-queue/{queue}</value>
-    <comment>Request uri to get the grand master league queue</comment>
+    <comment>Get the grandmaster league of a specific queue.</comment>
   </data>
   <data name="LEAGUE_ID" xml:space="preserve">
     <value>/lol/league/v4/leagues/{leagueId}</value>
-    <comment>Request uri to get a league by it id</comment>
+    <comment>Get league with given ID, including inactive entries.</comment>
   </data>
   <data name="LEAGUE_MASTER_QUEUE" xml:space="preserve">
     <value>/lol/league/v4/masterleagues/by-queue/{queue}</value>
-    <comment>Request uri to get the master league queue</comment>
+    <comment>Get the master league for given queue.</comment>
   </data>
   <data name="LEAGUE_QUEUE_TIER_DIVISION" xml:space="preserve">
     <value>/lol/league/v4/entries/{queue}/{tier}/{division}</value>
-    <comment>Request uri to get a league by it queue, tier and division</comment>
+    <comment>Get all the league entries.</comment>
   </data>
   <data name="LEAGUE_SUMMONER_ID" xml:space="preserve">
     <value>/lol/league/v4/entries/by-summoner/{encryptedSummonerId}</value>
-    <comment>Request uri to get League informations for Summoner by his id</comment>
+    <comment>Get league entries in all queues for a given summoner ID.</comment>
   </data>
   <data name="LOL_STATUS_SHARD" xml:space="preserve">
     <value>/lol/status/v3/shard-data</value>
-    <comment>Request uri to get shard data</comment>
+    <comment>Get League of Legends status for the given shard.</comment>
   </data>
   <data name="MATCH_ALL_ACCOUNT_ID" xml:space="preserve">
     <value>/lol/match/v4/matchlists/by-account/{encryptedAccountId}</value>
-    <comment>Request uri to get matches informations for Summoner by his account id</comment>
+    <comment>Get matchlist for games played on given account ID and platform ID and filtered using given filter parameters, if any.</comment>
   </data>
   <data name="MATCH_ID_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids</value>
-    <comment>Request uri to get matchs id by tournament code</comment>
+    <comment>Get match IDs by tournament code.</comment>
   </data>
   <data name="MATCH_MATCH_ID" xml:space="preserve">
     <value>/lol/match/v4/matches/{matchId}</value>
-    <comment>Request uri to get matchs by theirs id</comment>
+    <comment>Get match by match ID.</comment>
   </data>
   <data name="MATCH_MATCH_ID_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}</value>
-    <comment>Request uri to get matchs id by tournament code and match id</comment>
+    <comment>Get match by match ID and tournament code.</comment>
   </data>
   <data name="MATCH_TIMELINE_MATCH_ID" xml:space="preserve">
     <value>/lol/match/v4/timelines/by-match/{matchId}</value>
-    <comment>Request uri to get match timeline by match id</comment>
+    <comment>Get match timeline by match ID.</comment>
   </data>
   <data name="SPECTATOR_ALL_GAMES" xml:space="preserve">
     <value>/lol/spectator/v4/featured-games</value>
-    <comment>Request uri to get all spectators</comment>
+    <comment>Get list of featured games.</comment>
   </data>
   <data name="SPECTATOR_CURRENT_GAME_SUMMONER_ID" xml:space="preserve">
     <value>/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}</value>
-    <comment>Request uri to get spectator on current game by his summoner id</comment>
+    <comment>Get current game information for the given summoner ID.</comment>
   </data>
   <data name="SUMMONER_ACCOUNT_ID" xml:space="preserve">
     <value>/lol/summoner/v4/summoners/by-account/{encryptedAccountId}</value>
-    <comment>Request uri to get Summoner by his account id</comment>
+    <comment>Get a summoner by account ID.</comment>
+  </data>
+  <data name="SUMMONER_ID" xml:space="preserve">
+    <value>/lol/summoner/v4/summoners/{encryptedSummonerId}</value>
+    <comment>Get a summoner by summoner ID.</comment>
   </data>
   <data name="SUMMONER_NAME" xml:space="preserve">
-    <value>lol/summoner/v4/summoners/by-name/</value>
-    <comment>Request uri to get Summoner by his name</comment>
+    <value>/lol/summoner/v4/summoners/by-name/{summonerName}</value>
+    <comment>Get a summoner by summoner name.</comment>
   </data>
   <data name="SUMMONER_PUUID" xml:space="preserve">
     <value>/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}</value>
-    <comment>Request uri to get Summoner by his encrypted puuid</comment>
-  </data>
-  <data name="SUMMONER_SUMMONER_ID" xml:space="preserve">
-    <value>/lol/summoner/v4/summoners/{encryptedSummonerId}</value>
-    <comment>Request uri to get Summoner by ID</comment>
-  </data>
-  <data name="SUMMONER_SUMMONER_NAME" xml:space="preserve">
-    <value>/lol/summoner/v4/summoners/by-name/{summonerName}</value>
-    <comment>Request uri to get Summoner by his summoner name</comment>
+    <comment>Get a summoner by PUUID.</comment>
   </data>
   <data name="THIRD_PARTY_CODE_SUMMONER_ID" xml:space="preserve">
     <value>/lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}</value>
-    <comment>Request uri to get third party code by summoner id</comment>
+    <comment>Get third party code for a given summoner ID.</comment>
   </data>
   <data name="TOURNAMENT_GET_LOBBY_EVENTS_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/tournament/v4/lobby-events/by-code/{tournamentCode}</value>
-    <comment>Request uri to get tournament lobby events by tournament code</comment>
+    <comment>Gets a list of lobby events by tournament code.</comment>
   </data>
   <data name="TOURNAMENT_GET_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/tournament/v4/codes/{tournamentCode}</value>
-    <comment>Request uri to get tournament codes by tournament code</comment>
+    <comment>Returns the tournament code DTO associated with a tournament code string.</comment>
   </data>
   <data name="TOURNAMENT_POST_PROVIDER" xml:space="preserve">
     <value>/lol/tournament/v4/providers</value>
-    <comment>Request uri to insert a tournament provider</comment>
+    <comment>Creates a tournament provider and returns its ID.</comment>
   </data>
   <data name="TOURNAMENT_POST_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/tournament/v4/codes</value>
-    <comment>Request uri to insert a tournament code</comment>
-  </data>
-  <data name="TOURNAMENT_PUT_TOURNAMENT" xml:space="preserve">
-    <value>/lol/tournament/v4/tournaments</value>
-    <comment>Request uri to update tournament</comment>
+    <comment>Creates a tournament and returns its ID.</comment>
   </data>
   <data name="TOURNAMENT_PUT_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/tournament/v4/codes/{tournamentCode}</value>
-    <comment>Request uri to update tournament code</comment>
+    <comment>Update the pick type, map, spectator type, or allowed summoners for a code.</comment>
   </data>
   <data name="TOURNAMENT_STUB_CODE" xml:space="preserve">
     <value>/lol/tournament-stub/v4/codes</value>
-    <comment>Request uri to get tournaments stub codes</comment>
+    <comment>Create a mock tournament code for the given tournament.</comment>
   </data>
   <data name="TOURNAMENT_STUB_PROVIDER" xml:space="preserve">
     <value>/lol/tournament-stub/v4/providers</value>
-    <comment>Request uri to get tournaments stub providers</comment>
+    <comment>Creates a mock tournament provider and returns its ID.</comment>
   </data>
   <data name="TOURNAMENT_STUB_TOURNAMENT" xml:space="preserve">
     <value>/lol/tournament-stub/v4/tournaments</value>
-    <comment>Request uri to get tournaments stub</comment>
+    <comment>Creates a mock tournament and returns its ID.</comment>
   </data>
   <data name="TOURNAMENT_STUB_TOURNAMENT_CODE" xml:space="preserve">
     <value>/lol/tournament-stub/v4/lobby-events/by-code/{tournamentCode}</value>
-    <comment>Request uri to get tournament stub lobby events by tournament code</comment>
+    <comment>Gets a mock list of lobby events by tournament code.</comment>
   </data>
 </root>
