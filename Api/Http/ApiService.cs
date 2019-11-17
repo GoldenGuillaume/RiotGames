@@ -126,11 +126,11 @@ namespace RiotGames.Api.Http
             {
                 UriTemplate templateBuilder = new UriTemplate(template);
                 templateBuilder.AddParameters(pathParameters);
-                uri = new Uri(templateBuilder.Resolve());
+                uri = new Uri(templateBuilder.Resolve(), UriKind.Relative);
             }
             else
             {
-                uri = new Uri(template);
+                uri = new Uri(template, UriKind.Relative);
             }
 
             if (queryParameters != null)
