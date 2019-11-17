@@ -18,8 +18,7 @@ namespace RiotGames.Api.Http.Parameters
             }
             set
             {
-                Uri resultUri;
-                if (Uri.TryCreate(value, UriKind.Absolute, out resultUri) &&
+                if (Uri.TryCreate(value, UriKind.Absolute, out Uri resultUri) &&
                     (resultUri.Scheme == Uri.UriSchemeHttp && resultUri.Port == 80) ||
                     (resultUri.Scheme == Uri.UriSchemeHttps && resultUri.Port == 443))
                     Url = value;
