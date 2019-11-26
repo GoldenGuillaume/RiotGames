@@ -20,17 +20,18 @@ namespace RiotGames.Api.Http.Parameters
         [JsonProperty("mapType")]
         public string MapType { get; private set; }
 
+        private int _teamSize;
         [JsonProperty("teamSize")]
         public int TeamSize
         {
             get
             {
-                return TeamSize;
+                return _teamSize;
             }
             set
             {
                 if (value >= 1 && value <= 5)
-                    TeamSize = value;
+                    _teamSize = value;
             }
         }
 

@@ -9,19 +9,21 @@ namespace RiotGames.Api.Http.Parameters
         [JsonProperty("region")]
         public string Region { get; private set; }
 
+        private string _url;
+
         [JsonProperty("url")]
         public string Url
         {
             get
             {
-                return Url;
+                return _url;
             }
             set
             {
                 if (Uri.TryCreate(value, UriKind.Absolute, out Uri resultUri) &&
                     (resultUri.Scheme == Uri.UriSchemeHttp && resultUri.Port == 80) ||
                     (resultUri.Scheme == Uri.UriSchemeHttps && resultUri.Port == 443))
-                    Url = value;
+                    _url = value;
             }
         }
 

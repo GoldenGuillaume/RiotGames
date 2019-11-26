@@ -2,17 +2,18 @@
 {
     public class LeagueRequestParameters
     {
+        private int? _page;
         public int? Page
         {
             get
             {
-                return Page;
+                return _page;
             }
             set
             {
                 if (value >= 1)
                 {
-                    Page = value;
+                    _page = value;
                 }
             }
         }

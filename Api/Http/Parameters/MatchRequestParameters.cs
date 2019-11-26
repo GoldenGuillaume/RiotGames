@@ -7,79 +7,83 @@ namespace RiotGames.Api.Http.Parameters
         public HashSet<int> Champion { get; set; }
         public HashSet<int> Queue { get; set; }
         public HashSet<int> Season { get; set; }
+        private long? _beginTime;
         public long? BeginTime
         {
             get
             {
-                return BeginTime;
+                return _beginTime;
             }
             set
             {
                 if (EndTime != null)
                 {
                     if (value < EndTime && EndTime - value < 604800000)
-                        BeginTime = value;
+                        _beginTime = value;
                 }
                 else
                 {
-                    BeginTime = value;
+                    _beginTime = value;
                 }
             }
         }
+        private long? _endTime;
         public long? EndTime
         {
             get
             {
-                return EndTime;
+                return _endTime;
             }
             set
             {
                 if (BeginTime != null)
                 {
                     if (value > BeginTime && BeginTime + value < 604800000)
-                        EndTime = value;
+                        _endTime = value;
                 }
                 else
                 {
-                    EndTime = value;
+                    _endTime = value;
                 }
             }
         }
+        private int? _beginIndex;
         public int? BeginIndex
         {
             get
             {
-                return BeginIndex;
+                return _beginIndex;
             }
             set
             {
                 if (EndIndex != null)
                 {
                     if (value < EndIndex && EndIndex - value < 100)
-                        BeginIndex = value;
+                        _beginIndex = value;
                 }
                 else
                 {
-                    BeginIndex = value;
+                    _beginIndex = value;
                 }
             }
         }
+        private int? _endIndex;
         public int? EndIndex
         {
             get
             {
-                return EndIndex;
+                return _endIndex;
             }
             set
             {
                 if (BeginIndex != null)
                 {
                     if (value > BeginIndex && value - BeginIndex < 100)
-                        EndIndex = value;
+                        _endIndex = value;
                 }
                 else
                 {
-                    EndIndex = value;
+                    _endIndex = value;
                 }
             }
         }
