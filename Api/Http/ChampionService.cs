@@ -44,7 +44,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);

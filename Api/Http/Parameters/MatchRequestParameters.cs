@@ -2,12 +2,28 @@
 
 namespace RiotGames.Api.Http.Parameters
 {
+    /// <summary>
+    /// Match request parameters model
+    /// </summary>
     public class MatchRequestParameters
     {
+        /// <summary>
+        /// Champion parameter containing all the champions id 
+        /// </summary>
         public HashSet<int> Champion { get; set; }
+        /// <summary>
+        /// Queue parameter containing all the queues id
+        /// </summary>
         public HashSet<int> Queue { get; set; }
+        /// <summary>
+        /// Season parameter containing all the seasons id
+        /// </summary>
         public HashSet<int> Season { get; set; }
         private long? _beginTime;
+        /// <summary>
+        /// BeginTime parameter were the value need to be
+        /// inferior atleast 604 800 000 miliseconds to EndTime  
+        /// </summary>
         public long? BeginTime
         {
             get
@@ -28,6 +44,10 @@ namespace RiotGames.Api.Http.Parameters
             }
         }
         private long? _endTime;
+        /// <summary>
+        /// EndTime parameter were the value need to be
+        /// superior atleast 604 800 000 miliseconds to BeginTime  
+        /// </summary>
         public long? EndTime
         {
             get
@@ -48,6 +68,10 @@ namespace RiotGames.Api.Http.Parameters
             }
         }
         private int? _beginIndex;
+        /// <summary>
+        /// BeginIndex parameter were the value need to be inferior to 
+        /// EndTime atleast of 100
+        /// </summary>
         public int? BeginIndex
         {
             get
@@ -68,6 +92,10 @@ namespace RiotGames.Api.Http.Parameters
             }
         }
         private int? _endIndex;
+        /// <summary>
+        /// EndIndex parameter were the value need to be superior to 
+        /// BeginIndex atleast of 100
+        /// </summary>
         public int? EndIndex
         {
             get
