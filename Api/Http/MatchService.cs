@@ -29,7 +29,7 @@ namespace RiotGames.Api.Http
         /// Construct the Http client and set it depending
         /// on the League of legends server location
         /// </summary>
-        /// <param name="client">Http client to provide</param
+        /// <param name="client">Http client to provide</param>
         public MatchService(HttpClient client) : base(client) { }
 
         /// <summary>
