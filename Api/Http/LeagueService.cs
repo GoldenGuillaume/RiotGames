@@ -29,7 +29,6 @@ namespace RiotGames.Api.Http
         /// on the League of legends server location
         /// </summary>
         /// <param name="client">Http client to provide</param>
-        /// <param name="location">League of legends server location</param>
         public LeagueService(HttpClient client) : base(client) { }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -82,7 +81,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -110,7 +109,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -138,7 +137,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -181,7 +180,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -209,7 +208,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);

@@ -36,7 +36,7 @@ namespace RiotGames.Api.Http
         /// <returns>All masteries on champions</returns>
         public async Task<List<ChampionMastery>> GetChampionMasteriesByEncryptedSummonerId(string encryptedSummonerId)
         {
-            if (base.ServiceConfigured) 
+            if (base.ServiceConfigured)
             {
                 var pathParams = new Dictionary<string, object>
                 {
@@ -51,10 +51,10 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
-            throw new HttpServiceNotConfiguredException(base.Client); 
+            throw new HttpServiceNotConfiguredException(base.Client);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);
@@ -110,7 +110,7 @@ namespace RiotGames.Api.Http
                 }
                 else
                 {
-                    throw new HttpRequestException(string.Format("Code: {0}, Location: {1}, Description: {2}", response.StatusCode, GetType().FullName, response.ReasonPhrase));
+                    throw new HttpRequestException($"Code: {(int)response.StatusCode}-{response.StatusCode}, Location: {GetType().FullName}, Description: {response.ReasonPhrase}");
                 }
             }
             throw new HttpServiceNotConfiguredException(base.Client);

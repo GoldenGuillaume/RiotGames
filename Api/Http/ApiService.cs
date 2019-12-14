@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
 using RiotGames.Api.Enums;
-using RiotGames.Api.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +15,33 @@ namespace RiotGames.Api.Http
     /// </summary>
     public abstract class ApiService
     {
-        // pass it as const
-        private protected readonly static string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
+        /// <summary>
+        /// Base adress template for the Riot Games API
+        /// </summary>
+        private protected const string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
+        /// <summary>
+        /// Regex to verify the valid state of a Base adress
+        /// </summary>
         private static readonly Regex ValidBaseAdressRegex = new Regex(@"^https://(euw1|eun1|na1).api.riotgames.com/$", RegexOptions.Compiled | RegexOptions.Singleline);
-
+        /// <summary>
+        /// HttpClient instance
+        /// </summary>
         private protected readonly HttpClient Client;
 
-        private protected bool ServiceConfigured 
-        { 
-            get 
+        /// <summary>
+        /// Determine if The base adress is setted and valid
+        /// and if the HttpClient contains the right headers
+        /// </summary>
+        private protected bool ServiceConfigured
+        {
+            get
             {
                 return Client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
                     Client.DefaultRequestHeaders.Contains("Origin") &&
                     Client.DefaultRequestHeaders.GetValues("Origin").SingleOrDefault().Contains("https://developer.riotgames.com") &&
                     Client.DefaultRequestHeaders.Contains("X-Riot-Token") &&
                     Client.DefaultRequestHeaders.GetValues("X-Riot-Token").Count() == 1;
-            } 
+            }
         }
 
         /// <summary>
@@ -42,10 +52,9 @@ namespace RiotGames.Api.Http
         {
             Client = new HttpClient();
 
-            Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly in the environment variable", innerException: null));
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
             Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
-            Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         }
 
         /// <summary>
@@ -60,10 +69,9 @@ namespace RiotGames.Api.Http
                 BaseAddress = new Uri(string.Format(BaseAdressTemplate, location.ToString().ToLower()))
             };
 
-            Client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly in the environment variable", innerException: null));
+            Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
             Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
-            Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         }
 
         /// <summary>
@@ -81,14 +89,13 @@ namespace RiotGames.Api.Http
             client.DefaultRequestHeaders.Clear();
             client.BaseAddress = (client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(client.BaseAddress.AbsoluteUri)) ? client.BaseAddress : null;
 
-            client.DefaultRequestHeaders.Add("Origin", "https://developer.riotgames.com");
-            client.DefaultRequestHeaders.Add("X-Riot-Token", apiKey ?? Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN") ?? throw new ArgumentNullException("The Api key wasn't setted properly neither in HttpClient parameter or in the environment variable", innerException: null));
-            client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
+            client.DefaultRequestHeaders.Add("X-Riot-Token", apiKey ?? Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
+            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
+            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
 
             Client = client;
         }
-            
+
 
         /// <summary>
         /// Configure on each server the Api calls
