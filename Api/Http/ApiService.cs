@@ -16,6 +16,7 @@ namespace RiotGames.Api.Http
     /// </summary>
     public abstract class ApiService
     {
+        // pass it as const
         private protected readonly static string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
         private static readonly Regex ValidBaseAdressRegex = new Regex(@"^https://(euw1|eun1|na1).api.riotgames.com/$", RegexOptions.Compiled | RegexOptions.Singleline);
 
