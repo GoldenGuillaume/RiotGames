@@ -18,7 +18,7 @@ namespace RiotGames.Api.Http
         /// <summary>
         /// Base adress template for the Riot Games API
         /// </summary>
-        private protected const string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
+        private const string BaseAdressTemplate = "https://{0}.api.riotgames.com/";
         /// <summary>
         /// Regex to verify the valid state of a Base adress
         /// </summary>
@@ -114,11 +114,11 @@ namespace RiotGames.Api.Http
         /// <example>
         /// How to use it:
         /// <code>
-        ///     BuildUri("/template/uri", new Dictionary<string, object>(), new object());
+        ///     BuildUri("/template/uri", new Dictionary&lt;string, object&gt;(), new object());
         ///     // Use named arguments to reverse params order
-        ///     BuildUri("/template/uri", queryParameters: new object(), pathParameters: new Dictionary<string, object>());
+        ///     BuildUri("/template/uri", queryParameters: new object(), pathParameters: new Dictionary&lt;string, object&gt;());
         ///     // with only one optionnal param 
-        ///     BuildUri("/template/uri"), new Dictionary<string, object>());
+        ///     BuildUri("/template/uri"), new Dictionary&lt;string, object&gt;());
         ///     // with only one optionnal param reversed order
         ///     BuildUri("/template/uri"), queryParameters: new object());
         /// </code>
@@ -178,12 +178,12 @@ namespace RiotGames.Api.Http
             {
                 var builder = new UriBuilder(uri);
                 var query = QueryHelpers.ParseQuery(uri.Query);
-                // foreach (PropertyInfo property in queryParameters.GetType().GetProperties())
-                foreach (FieldInfo field in queryParameters.GetType().GetFields())
+
+                foreach (PropertyInfo property in queryParameters.GetType().GetProperties())
                 {
-                    if (field.GetValue(queryParameters) != null)
+                    if (property.GetValue(queryParameters) != null)
                     {
-                        query[field.Name] = field.GetValue(queryParameters).ToString();
+                        query[property.Name] = property.GetValue(queryParameters).ToString();
                     }
                 }
                 builder.Query = query.ToString();
