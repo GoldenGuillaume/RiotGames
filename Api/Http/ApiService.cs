@@ -37,8 +37,6 @@ namespace RiotGames.Api.Http
             get
             {
                 return Client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(Client.BaseAddress.AbsoluteUri) &&
-                    Client.DefaultRequestHeaders.Contains("Origin") &&
-                    Client.DefaultRequestHeaders.GetValues("Origin").SingleOrDefault().Contains("https://developer.riotgames.com") &&
                     Client.DefaultRequestHeaders.Contains("X-Riot-Token") &&
                     Client.DefaultRequestHeaders.GetValues("X-Riot-Token").Count() == 1;
             }
@@ -53,8 +51,7 @@ namespace RiotGames.Api.Http
             Client = new HttpClient();
 
             Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
-            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
-            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
+            Client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
 
         /// <summary>
@@ -70,8 +67,7 @@ namespace RiotGames.Api.Http
             };
 
             Client.DefaultRequestHeaders.Add("X-Riot-Token", Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
-            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
-            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
+            Client.DefaultRequestHeaders.Add("Accept", "application/json");
         }
 
         /// <summary>
@@ -90,8 +86,7 @@ namespace RiotGames.Api.Http
             client.BaseAddress = (client.BaseAddress != null && ValidBaseAdressRegex.IsMatch(client.BaseAddress.AbsoluteUri)) ? client.BaseAddress : null;
 
             client.DefaultRequestHeaders.Add("X-Riot-Token", apiKey ?? Environment.GetEnvironmentVariable("RIOTGAMES_API_TOKEN"));
-            Client.DefaultRequestHeaders.Add("Accept-Charset", "application/x-www-form-urlencoded; charset=UTF-8");
-            Client.DefaultRequestHeaders.Add("Accept-Language", "fr,en-US;q=0.9,en;q=0.8");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             Client = client;
         }
