@@ -170,7 +170,7 @@ namespace RiotGames.Api.Http
             {
                 var builder = new UriBuilder(uri);
                 var query = QueryHelpers.ParseQuery(uri.Query);
-
+                // foreach (PropertyInfo property in queryParameters.GetType().GetProperties())
                 foreach (FieldInfo field in queryParameters.GetType().GetFields())
                 {
                     if (field.GetValue(queryParameters) != null)
