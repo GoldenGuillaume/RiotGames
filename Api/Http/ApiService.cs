@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
-using RiotGames.Api.Enums;
+﻿using RiotGames.Api.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web;
 using Tavis.UriTemplates;
 
 namespace RiotGames.Api.Http
@@ -124,22 +124,21 @@ namespace RiotGames.Api.Http
             if (template == null)
                 throw new ArgumentNullException(nameof(template), "The parameter cannot be null");
 
-            Uri uri;
+            string uri;
             if (pathParameters != null)
             {
                 UriTemplate templateBuilder = new UriTemplate(template);
                 templateBuilder.AddParameters(pathParameters);
-                uri = new Uri(templateBuilder.Resolve(), UriKind.Relative);
+                uri = templateBuilder.Resolve();
             }
             else
             {
-                uri = new Uri(template, UriKind.Relative);
+                uri = template;
             }
 
             if (queryParameters != null)
             {
-                var builder = new UriBuilder(uri);
-                var query = QueryHelpers.ParseQuery(uri.Query);
+                var query = HttpUtility.ParseQueryString(string.Empty);
 
                 foreach (PropertyInfo property in queryParameters.GetType().GetProperties())
                 {
@@ -148,10 +147,14 @@ namespace RiotGames.Api.Http
                         query[property.Name] = property.GetValue(queryParameters).ToString();
                     }
                 }
-                builder.Query = query.ToString();
-                uri = builder.Uri;
+                Console.WriteLine(query.ToString());
+                uri = $"{uri}?{query.ToString()}";
             }
-            return uri;
+
+            if (Uri.IsWellFormedUriString(uri, UriKind.Relative))
+                return new Uri(uri, UriKind.Relative);
+            else
+                throw new UriFormatException("The template parameter is not a well formed Uri string");
         }
     }
 }
