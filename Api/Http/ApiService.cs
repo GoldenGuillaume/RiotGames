@@ -121,39 +121,6 @@ namespace RiotGames.Api.Http
         /// <returns>Uri formatted</returns>
         private protected static Uri BuildUri(string template, Dictionary<string, object> pathParameters = null, object queryParameters = null)
         {
-            /*
-            if (template == null)
-                throw new ArgumentNullException(nameof(template), "The parameter cannot be null");
-
-            Uri tempBase = new Uri("http://temp.fr");
-            Uri uri;
-
-            if (pathParameters != null)
-            {
-                UriTemplate templateBuilder = new UriTemplate(template);
-                uri = templateBuilder.BindByName(tempBase, pathParameters);
-            }
-            else
-            {
-                uri = new Uri(tempBase, template);
-            }
-
-            if (queryParameters != null)
-            {
-                var builder = new UriBuilder(uri);
-                var query = HttpUtility.ParseQueryString(uri.Query);
-                foreach (FieldInfo field in queryParameters.GetType().GetType().GetFields())
-                {
-                    if (field.GetValue(queryParameters) != null)
-                    {
-                        query[(field.GetCustomAttribute(typeof(ParameterNameAttribute)) as ParameterNameAttribute).Name] = field.GetValue(queryParameters).ToString();
-                    }
-                }
-                builder.Query = query.ToString();
-                uri = builder.Uri;
-            }
-            return uri.MakeRelativeUri(tempBase);
-            */
             if (template == null)
                 throw new ArgumentNullException(nameof(template), "The parameter cannot be null");
 
