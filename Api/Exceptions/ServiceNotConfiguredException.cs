@@ -25,25 +25,19 @@ namespace RiotGames.Api.Exceptions
         /// <summary>
         /// Default constructor
         /// </summary>
-        public HttpServiceNotConfiguredException()
-        {
-        }
+        public HttpServiceNotConfiguredException() { }
 
         /// <summary>
         /// Default constructor with custom message
         /// </summary>
         /// <param name="message">Message content</param>
-        public HttpServiceNotConfiguredException(string message) : base(message)
-        {
-        }
+        public HttpServiceNotConfiguredException(string message) : base(message) { }
 
         /// <summary>
         /// Default constructor with custom message and exception
         /// </summary>
         /// <param name="message">Message content</param>
         /// <param name="innerException">Parent exception</param>
-        public HttpServiceNotConfiguredException(string message, System.Exception innerException) : base(message, innerException)
-        {
-        }
+        public HttpServiceNotConfiguredException(string message, System.Exception innerException) : base(message, innerException) { }
     }
 }

@@ -2,7 +2,6 @@
 using RiotGames.Api.Exceptions;
 using RiotGames.Api.Http.Parameters;
 using RiotGames.Api.Models;
-using RiotGamesRiotGames.Api.Models;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;

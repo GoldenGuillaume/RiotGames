@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RiotGames.Api.Http.Parameters
 {
@@ -10,15 +11,16 @@ namespace RiotGames.Api.Http.Parameters
         /// <summary>
         /// Champion parameter containing all the champions id 
         /// </summary>
-        public HashSet<int> Champion { get; set; }
+        public HashSet<int> Champion { get; set; } = new HashSet<int>();
         /// <summary>
         /// Queue parameter containing all the queues id
         /// </summary>
-        public HashSet<int> Queue { get; set; }
+        public HashSet<int> Queue { get; set; } = new HashSet<int>();
         /// <summary>
         /// Season parameter containing all the seasons id
         /// </summary>
-        public HashSet<int> Season { get; set; }
+        [ObsoleteAttribute("This field should not be considered reliable for the purposes of filtering matches by season.")]
+        public HashSet<int> Season { get; set; } = new HashSet<int>();
         private long? _beginTime;
         /// <summary>
         /// BeginTime parameter were the value need to be

@@ -1,7 +1,6 @@
-﻿using RiotGames.Api.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RiotGamesRiotGames.Api.Models
+namespace RiotGames.Api.Models
 {
     public class MatchList
     {
